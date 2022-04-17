@@ -27,4 +27,4 @@ app.use("/residents", residentController);
 
 
 // listening to port 3007
-app.listen(3007);
+app.listen(process.env.PORT || 3007);
