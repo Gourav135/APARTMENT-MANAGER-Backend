@@ -34,6 +34,7 @@ router.post(
     body("password").notEmpty().withMessage("please fill password field!").isLength({min : 5, max : 20}).withMessage("password length invalid"),
 
     async(req, res) =>{
+    try{
         // validating user credentials
         let errors = validationResult(req);
         if(!errors.isEmpty())
@@ -41,9 +42,8 @@ router.post(
             return res.status(400).send(errors.array());
         }
 
-    try{
         await Manager.create(req.body);
-        res.status(200).send("manager registered successfully!");
+        return res.status(200).send({status : true});
     }catch(error){
         console.log(error);
     }
@@ -61,11 +61,11 @@ router.post("/login", async (req, res) => {
             // console.log(password_matched);
             if(password_matched)
             {
-                return res.status(200).send(true);
+                return res.status(200).send({status : true});
             }
-            return res.status(400).send(false);
+            return res.status(400).send({status : false});
         }
-        return res.status(400).send(false);
+        return res.status(400).send({status : false});
     }catch(error){
         console.log(error);
     }

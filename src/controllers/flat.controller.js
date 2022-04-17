@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// get // single flat details + residents details // using flat mongo id
+// get // 10 flats per page // page as param
 router.get("/:page_count", async (req, res) => {
     try{
         let skip_count = +(req.params.page_count);
